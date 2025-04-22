@@ -1,0 +1,39 @@
+<h1>Profile</h1>
+
+<div class="relative">
+    <% if @profile.user == Current.user %>
+        <%= link_to 'Edit Profile', edit_profile_path(@profile), class: 'absolute top-0 right-0 btn btn-primary' %>
+    <% end %>
+</div>
+
+<div class="profile mb-6">
+    <h2 class="text-xl font-semibold"><%= link_to @profile.nickname, profile_path(@profile) %></h2>
+    <p>Email: <%= @profile.username %></p>
+    <p>Bio: <%= @profile.bio %></p>
+</div>
+
+<div class="payment-links mt-5">
+    <div class="flex justify-between items-center mb-5">
+        <h1 class="font-bold text-4xl">Payment Links</h1>
+        <%= link_to "New payment link", new_payment_link_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    </div>
+    <% if @profile.payment_links.any? %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <% @profile.payment_links.each do |payment_link| %>
+                <div class="border rounded-lg shadow-md p-4 bg-white dark:bg-gray-800 h-48 flex flex-col justify-between">
+                    <div class="flex items-center">
+                        <%# Display the logo for the payment platform %>
+                        <%= image_tag "logos/#{payment_link.payment_platform.logo_url}", alt: payment_link.payment_platform.name, class: "h-12 w-12 mr-4" %>
+                        <p class="text-lg font-semibold"><%= payment_link.payment_platform.name %></p>
+                    </div>
+                    <p class="mt-4"><strong>PayID:</strong> <%= payment_link.payid %></p>
+                    <div class="mt-2">
+                        <%= link_to 'View', payment_link_path(payment_link), class: 'text-blue-500 hover:underline' %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    <% else %>
+        <p>No payment links found for this profile.</p>
+    <% end %>
+</div>

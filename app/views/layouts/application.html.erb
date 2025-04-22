@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= content_for(:title) || "Paypay" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+</head>
+
+<body class="bg-white border-gray-200 dark:bg-gray-900">
+        <nav class="bg-white border-gray-200 dark:bg-gray-900">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <div class="text-lg font-bold">PayPay</div>
+                <ul class="font-medium flex flex-row space-x-8 mt-0 mr-6 md:mt-0">
+                    <li><%= link_to "Home", root_path, class: "hover:underline" %></li>
+                </ul>
+                <% if authenticated? %>
+                <div data-controller="dropdown" data-dropdown-open-value="false">
+                  <button role="button" tabindex=0 data-action="mouseenter->dropdown#show mouseleave->dropdown#scheduleHide" class="rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer">Profile</button>
+                  <div data-dropdown-target="dropdown" data-action="mouseenter->dropdown#dropShow mouseleave->dropdown#hide" class="hidden absolute right-0 mt-2 w-48 rounded-3xl bg-white border border-gray-200 dark:bg-gray-900">
+                    <ul class="bg-white border border-gray-200 dark:bg-gray-900">
+                      <li><%= link_to "Logout", session_path, method: :delete, data: { turbo_method: :delete }, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %></li>
+                      <li><%= link_to "Profile", profile_path(Current.user.profile.username), class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %></li>
+                      <li></li>
+                    </ul>
+                  </div>
+                </div>
+                <% else %>
+                <%= link_to "Login", new_session_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+                <%= link_to "Sign up", new_registration_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+                <% end %>
+            </div>
+        </nav>
+        <main>
+          <%= yield %>
+        </main>
+</body>
+
+</html>

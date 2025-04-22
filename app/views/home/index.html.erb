@@ -1,0 +1,49 @@
+<header class="bg-blue-600 text-white p-6">
+  <h1 class="text-4xl font-bold">Welcome to PayPay</h1>
+  <p class="mt-2">Your one-stop solution for managing all your peer-to-peer payment links.</p>
+</header>
+<main class="container mx-auto mt-10 px-5">
+  <section class="text-center">
+    <h2 class="text-2xl font-semibold">Get Started</h2>
+    <p class="mt-2">Create and share your payment links easily.</p>
+    <div class="mt-4">
+      <%= link_to 'Sign Up', new_registration_path, class: 'btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+      <%= link_to 'Log In', new_session_path, class: 'btn btn-secondary bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2' %>
+    </div>
+  </section>
+  <section class="mt-10">
+    <h2 class="text-2xl font-semibold text-center">How It Works</h2>
+    <div class="mt-4 flex flex-wrap justify-center space-x-4">
+      <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
+        <img class="w-full" src="https://via.placeholder.com/400x200" alt="Create Links">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Create Links</div>
+          <p class="text-gray-700 text-base">
+            Easily create links for all your peer-to-peer payment platforms in one place.
+          </p>
+        </div>
+      </div>
+      <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
+        <img class="w-full" src="https://via.placeholder.com/400x200" alt="Share Links">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Share Links</div>
+          <p class="text-gray-700 text-base">
+            Share your payment links with friends, family, and clients effortlessly.
+          </p>
+        </div>
+      </div>
+      <div class="max-w-sm rounded overflow-hidden shadow-lg m-4">
+        <img class="w-full" src="https://via.placeholder.com/400x200" alt="Manage Links">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Manage Links</div>
+          <p class="text-gray-700 text-base">
+            Keep track of all your payment links and manage them from a single dashboard.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="bg-gray-800 text-white text-center p-4 mt-10">
+  <p>&copy; 2025 PayPay. All rights reserved.</p>
+</footer>
